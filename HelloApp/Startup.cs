@@ -107,15 +107,31 @@ namespace HelloApp
             //});
 
 
-            app.MapWhen(context => {
+            //app.MapWhen(context => {
 
-                return context.Request.Query.ContainsKey("id") &&
-                        context.Request.Query["id"] == "5";
-            }, HandleId);
+            //    return context.Request.Query.ContainsKey("id") &&
+            //            context.Request.Query["id"] == "5";
+            //}, HandleId);
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Good bye, World...");
+            //});
+
+
+            //app.UseMiddleware<TokenMiddleware>();
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World");
+            //});
+
+
+            app.UseToken("55555");
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Good bye, World...");
+                await context.Response.WriteAsync("Hello World");
             });
 
         }
@@ -136,13 +152,13 @@ namespace HelloApp
         //}
 
 
-        private static void HandleId(IApplicationBuilder app)
-        {
-            app.Run(async context =>
-            {
-                await context.Response.WriteAsync("id is equal to 5");
-            });
-        }
+        //private static void HandleId(IApplicationBuilder app)
+        //{
+        //    app.Run(async context =>
+        //    {
+        //        await context.Response.WriteAsync("id is equal to 5");
+        //    });
+        //}
 
     }
 }
