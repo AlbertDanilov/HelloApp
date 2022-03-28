@@ -7,8 +7,7 @@ namespace HelloApp.Middlewares
     {
         private readonly RequestDelegate _next;
 
-        public RoutingMiddleware(RequestDelegate next)
-        {
+        public RoutingMiddleware(RequestDelegate next) {
             this._next = next;
         }
 

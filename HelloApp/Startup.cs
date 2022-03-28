@@ -29,12 +29,12 @@ namespace HelloApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            //// если приложение в процессе разработки
-            //if (env.IsDevelopment())
-            //{
-            //    // то выводим информацию об ошибке, при наличии ошибки
-            //    app.UseDeveloperExceptionPage();
-            //}
+            // если приложение в процессе разработки
+            if (env.IsDevelopment())
+            {
+                // то выводим информацию об ошибке, при наличии ошибки
+                app.UseDeveloperExceptionPage();
+            }
 
             //// добавляем возможности маршрутизации
             //app.UseRouting();
