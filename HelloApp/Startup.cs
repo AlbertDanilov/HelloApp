@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloApp.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,7 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             //// если приложение в процессе разработки
             //if (env.IsDevelopment())
             //{
@@ -127,12 +129,17 @@ namespace HelloApp
             //});
 
 
-            app.UseToken("55555");
+            //app.UseToken("55555");
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World");
+            //});
+
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<RoutingMiddleware>();
 
         }
 

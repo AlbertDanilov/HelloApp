@@ -1,4 +1,5 @@
 ﻿
+using HelloApp.Middlewares;
 using Microsoft.AspNetCore.Builder;
 
 namespace HelloApp

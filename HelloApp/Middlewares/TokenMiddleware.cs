@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace HelloApp
+namespace HelloApp.Middlewares
 {
     public class TokenMiddleware
     {
