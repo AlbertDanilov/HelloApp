@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloApp.Middlewares;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace HelloApp
@@ -142,7 +144,44 @@ namespace HelloApp
             //app.UseMiddleware<RoutingMiddleware>();
 
 
+            //app.UseDefaultFiles();
+            //при отправке запроса к корню веб-приложения типа http://localhost:xxxx/ приложение будет искать в папке wwwroot следующие файлы:
+            //default.htm
+            //default.html
+            //index.htm
+            //index.html
+
+            //app.UseDirectoryBrowser();
+
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"static")), //wwwroot\html
+
+            //    RequestPath = new PathString("/pages")
+            //});
+
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear(); // удаляем имена файлов по умолчанию
+            options.DefaultFileNames.Add("content.html"); // добавляем новое имя файла
+            app.UseDefaultFiles(options);
+
             app.UseStaticFiles();   // добавляем поддержку статических файлов
+
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"static")), //wwwroot\html
+
+            //    RequestPath = new PathString("/pages")
+            //});
+
+
+            //app.UseFileServer(new FileServerOptions() { 
+            //    EnableDirectoryBrowsing=true,
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")),
+            //    RequestPath = new PathString("/pages"),
+            //    EnableDefaultFiles = true
+            //});
+
 
             app.Run(async (context) =>
             {

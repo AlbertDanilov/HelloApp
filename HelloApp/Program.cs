@@ -21,7 +21,7 @@ namespace HelloApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseWebRoot("static"); //переопределяем каталог дял статических файлов
+                    webBuilder.UseWebRoot("static"); //переопределяем каталог для статических файлов
                 });
     }
 }
