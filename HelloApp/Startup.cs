@@ -16,26 +16,32 @@ namespace HelloApp
     public class Startup
     {
         IWebHostEnvironment _env;
-        public Startup(IWebHostEnvironment env)
-        {
+        public Startup(IWebHostEnvironment env) {
             _env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+            //env.EnvironmentName = "Production";
+
+            //// обработка ошибок HTTP
+            //app.UseStatusCodePages();
+            ////app.UseStatusCodePages("text/plain", "Error. Status code : {0}");
+
+            //app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
 
             //// если приложение в процессе разработки
-            //if (env.IsDevelopment())
-            //{
+            //if (env.IsDevelopment()) {
             //    // то выводим информацию об ошибке, при наличии ошибки
             //    app.UseDeveloperExceptionPage();
+            //}
+            //else {
+            //    app.UseExceptionHandler("/error");
             //}
 
             //// добавляем возможности маршрутизации
@@ -160,12 +166,14 @@ namespace HelloApp
             //    RequestPath = new PathString("/pages")
             //});
 
-            DefaultFilesOptions options = new DefaultFilesOptions();
-            options.DefaultFileNames.Clear(); // удаляем имена файлов по умолчанию
-            options.DefaultFileNames.Add("content.html"); // добавляем новое имя файла
-            app.UseDefaultFiles(options);
 
-            app.UseStaticFiles();   // добавляем поддержку статических файлов
+            //DefaultFilesOptions options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Clear(); // удаляем имена файлов по умолчанию
+            //options.DefaultFileNames.Add("content.html"); // добавляем новое имя файла
+            //app.UseDefaultFiles(options);
+
+            //app.UseStaticFiles();   // добавляем поддержку статических файлов
+
 
             //app.UseStaticFiles(new StaticFileOptions()
             //{
@@ -183,10 +191,25 @@ namespace HelloApp
             //});
 
 
-            app.Run(async (context) =>
+            //app.Map("/error", ap => ap.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("DivideByZeroException occured!");
+            //}));
+
+            //app.Run(async (context) =>
+            //{
+            //    int x = 0;
+            //    int y = 8 / x;
+            //    await context.Response.WriteAsync($"Result = {y}");
+
+            //    //await context.Response.WriteAsync("Hello World");
+            //});
+
+            app.Map("/hello", ap => ap.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World");
-            });
+                await context.Response.WriteAsync($"Hello ASP.NET Core");
+            }));
+
         }
 
         //private static void Index(IApplicationBuilder app)
